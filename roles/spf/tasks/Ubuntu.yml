@@ -1,0 +1,5 @@
+---
+- name: Superfile | Install
+  ansible.builtin.shell:
+    cmd: "bash -c \"$(curl -sLo- https://superfile.netlify.app/install.sh)\""
+  become: yes

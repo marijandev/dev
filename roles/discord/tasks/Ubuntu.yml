@@ -1,0 +1,5 @@
+- name: Discord | Install
+  ansible.builtin.apt:
+    name: discord
+    state: latest
+  become: true

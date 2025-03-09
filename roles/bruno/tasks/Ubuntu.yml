@@ -1,0 +1,16 @@
+---
+- name: Ensure flatpak is installed
+  ansible.builtin.apt:
+    name: flatpak
+    state: present
+
+- name: Install Bruno via Flatpak
+  ansible.builtin.flatpak:
+    name: com.usebruno.Bruno
+    state: present
+
+- name: Install Bruno CLI
+  ansible.builtin.npm:
+    name: "@usebruno/cli"
+    state: present
+    global: yes
