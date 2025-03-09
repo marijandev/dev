@@ -160,7 +160,7 @@ update_ansible_galaxy() {
 source /etc/os-release
 __task "Loading Setup for detected OS: $ID"
 case $ID in
-  ubuntu)
+  ubuntu | pop)
     ubuntu_setup
     ;;
   arch)

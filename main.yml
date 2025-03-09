@@ -3,7 +3,7 @@
   connection: local
 
   vars:
-    distribution_name: "{{ 'Ubuntu' if ansible_distribution == 'Pop!_OS' else ansible_distribution }}"
+    distribution_name: Ubuntu
 
   pre_tasks:
     - name: Detect Host User
@@ -14,7 +14,7 @@
   tasks:
     - name: Display distribution name
       debug:
-        msg: "Distribution: {{ distribution_name }}"
+        msg: "Distribution: {{ distribution_name }}, Ansible OS family: {{ ansible_os_family }}"
       tags:
         - always
 
