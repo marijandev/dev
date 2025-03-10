@@ -3,6 +3,7 @@
   ansible.builtin.apt:
     name: wget
     state: present
+  become: true
 
 - name: Download DBeaver Community Edition .deb file
   ansible.builtin.get_url:
