@@ -1,19 +1,37 @@
 ---
-- name: "Neovim | {{ distribution_name }} | Dependencies"
-  ansible.builtin.apt:
+- name: Install build prerequisites
+  apt:
     name:
+      - ninja-build
       - cmake
+      - gettext
       - curl
-      - pkg-config
-      - libtool
-      - unzip
-      - ansible-lint
-      - ripgrep
+      - build-essential
     state: present
-  become: true
+  become: yes
 
-- name: "Neovim | {{ distribution_name }} | Install"
-  ansible.builtin.apt_repository:
-    repo: ppa:neovim-ppa/unstable
-    state: present
-  become: true
+- name: Create ~/src directory if it doesn't exist
+  file:
+    path: "{{ ansible_user_dir }}/src"
+    state: directory
+
+- name: Clone or Update Neovim repository
+  git:
+    repo: https://github.com/neovim/neovim.git
+    dest: "{{ ansible_user_dir }}/src/neovim"
+    version: master
+  register: git_status
+
+- name: Build and install Neovim if updated
+  block:
+    - name: Build Neovim
+      shell:
+        cmd: make CMAKE_BUILD_TYPE="{{ build_type }}"
+        chdir: "{{ ansible_user_dir }}/src/neovim"
+
+    - name: Install Neovim
+      shell:
+        cmd: make install
+        chdir: "{{ ansible_user_dir }}/src/neovim"
+      become: yes
+  when: git_status.changed == True
