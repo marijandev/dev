@@ -3,6 +3,7 @@
   ansible.builtin.apt:
     name: apt-transport-https
     state: present
+  become: true
 
 - name: Check if repository exists
   ansible.builtin.shell:
