@@ -19,6 +19,26 @@
   become: true
   when: font_installed.rc != 0
 
+- name: Check if Ubuntu Nerd Font is installed
+  ansible.builtin.shell:
+    cmd: fc-list | grep -q "UbuntuMono"
+  register: ubuntu_installed
+  ignore_errors: yes
+
+- name: Download Ubuntu Nerd Font
+  ansible.builtin.get_url:
+    url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/UbuntuMono.zip
+    dest: /tmp/UbuntuMono.zip
+  when: ubuntu_installed.rc != 0
+
+- name: Unzip Ubuntu Nerd Font
+  ansible.builtin.unarchive:
+    src: /tmp/UbuntuMono.zip
+    dest: /usr/local/share/fonts
+    remote_src: true
+  become: true
+  when: ubuntu_installed.rc != 0
+
 - name: Update font cache
   ansible.builtin.shell: fc-cache -fv
   become: true
