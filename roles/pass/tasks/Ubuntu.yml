@@ -1,0 +1,37 @@
+---
+- name: Install dependencies for gopass
+  apt:
+    name:
+      - git
+      - gnupg
+      - rng-tools
+    state: present
+  become: yes
+
+- name: Add gopass GPG key
+  shell: |
+    curl -fsSLo /usr/share/keyrings/gopass-archive-keyring.gpg https://packages.gopass.pw/repos/gopass/gopass-archive-keyring.gpg
+  become: yes
+
+- name: Add gopass repository
+  lineinfile:
+    path: /etc/apt/sources.list.d/gopass.sources
+    line: |
+      Types: deb
+      URIs: https://packages.gopass.pw/repos/gopass
+      Suites: stable
+      Architectures: all amd64 arm64 armhf
+      Components: main
+      Signed-By: /usr/share/keyrings/gopass-archive-keyring.gpg
+    create: yes
+    state: present
+  become: yes
+
+- name: Update package cache and install gopass
+  apt:
+    update_cache: yes
+    name:
+      - gopass
+      - gopass-archive-keyring
+    state: latest
+  become: yes
