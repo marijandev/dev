@@ -1,4 +1,9 @@
 ---
+- name: Create ~/.nvm directory if it doesn't exist
+  file:
+    path: "{{ ansible_user_dir }}/.nvm"
+    state: directory
+
 - name: "NVM | Download Latest Version JSON"
   ansible.builtin.uri:
     url: https://api.github.com/repos/nvm-sh/nvm/releases/latest
@@ -21,5 +26,5 @@
   ansible.builtin.shell: >
     set -o pipefail && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/{{ nvm_latest_release }}/install.sh | bash
   args:
-    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+    creates: "{{ ansible_user_dir }}/.nvm/nvm.sh"
     executable: /bin/bash
