@@ -1,7 +1,7 @@
 ---
 - name: "Install dependencies"
   ansible.builtin.apt:
-    ansible.builtin.pkg:
+    pkg:
       - 'curl'
       - 'gcc'
       - 'git'
