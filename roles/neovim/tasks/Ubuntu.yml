@@ -15,6 +15,11 @@
     path: "{{ ansible_user_dir }}/src"
     state: directory
 
+- name: Fetch Neovim tags with force
+  ansible.builtin.shell: |
+    git -C "{{ ansible_user_dir }}/src/neovim" fetch --tags --force origin
+  become: true
+
 - name: "Clone or Update Neovim repository"
   ansible.builtin.git:
     repo: https://github.com/neovim/neovim.git
