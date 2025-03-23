@@ -1,15 +1,13 @@
 ---
-- name: "Copy SSH keys"
-  ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/.ssh/{{ ssh_key_item.key }}"
-    content: "{{ ssh_key_item.value }}"
-    mode: "0600"
-  no_log: true
-  loop_control:
-    loop_var: ssh_key_item
-  with_items: "{{ ssh_key | default({}) | dict2items }}"
+- name: Create .ssh directory
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.ssh"
+    state: directory
+    mode: '0700'
 
-# - name: "Copy config"
-#   ansible.builtin.template:
-#     dest: "{{ ansible_user_dir }}/.ssh/config"
-#     src: "config.j2"
+- name: Copy SSH config template
+  ansible.builtin.template:
+    src: config.j2
+    dest: "{{ ansible_user_dir }}/.ssh/config"
+    mode: '0644'
+    force: false
