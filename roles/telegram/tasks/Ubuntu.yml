@@ -1,0 +1,10 @@
+---
+- name: Ensure flatpak is installed
+  ansible.builtin.apt:
+    name: flatpak
+    state: present
+
+- name: Install Telegram via Flatpak
+  ansible.builtin.flatpak:
+    name: org.telegram.desktop
+    state: present
