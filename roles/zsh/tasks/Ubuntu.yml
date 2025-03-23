@@ -8,7 +8,7 @@
 - name: "Ensure zsh is the default shell"
   ansible.builtin.user:
     name: "{{ host_user }}"
-    ansible.builtin.shell: "/usr/bin/zsh"
+    shell: "/usr/bin/zsh"
   become: true
 
 - name: "Download Oh My Zsh installation script"
