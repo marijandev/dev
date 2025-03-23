@@ -20,3 +20,8 @@
       - ripgrep
     state: present
   become: true
+
+- name: "Create work dir"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/work"
+    state: directory

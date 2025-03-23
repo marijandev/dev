@@ -9,3 +9,8 @@
     state: present
   when:
     - ansible_host_is_desktop_environment | bool
+
+- name: "Create vaults dir"
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/vaults"
+    state: directory
