@@ -1,4 +1,3 @@
-# TODO: download obsidian .deb from github instead of flatpak
 ---
 - name: Obsidian | Detect if Desktop Environment"
   ansible.builtin.set_fact:

@@ -21,7 +21,6 @@
   register: ohmyzsh_result
   failed_when: "'FAILED' in ohmyzsh_result.stderr"
 
-  # TODO: figure out how to set zsh as default shell
 - name: sets default shell to zsh
   become: true
   ansible.builtin.command: chsh -s /usr/bin/zsh

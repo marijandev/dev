@@ -23,13 +23,13 @@ default_roles:
   - docker
   - flatpak
   - fonts
-  # - gcloud
-  # - discord
-  # - dbeaver
   # - brave
   # - obsidian
-  # - dbeaver
+  # - gcloud
   # - bruno
+  # - dbeaver
+  # - discord
+  # - slack
 
 git_user_name: "cyf0rk"
 home: "{{ lookup('ansible.builtin.env', 'HOME') }}"
