@@ -27,8 +27,9 @@
   register: key_exists
 
 - name: Add Google Cloud SDK GPG key (Debian/Ubuntu)
-  ansible.builtin.shell: |
-    curl -fsSLo /usr/share/keyrings/cloud.google.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+  shell: |
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+  become: true
   args:
     creates: /usr/share/keyrings/cloud.google.gpg
 
