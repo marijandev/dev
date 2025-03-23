@@ -1,5 +1,4 @@
-- name: Discord | Install
-  ansible.builtin.apt:
-    name: discord
-    state: latest
-  become: true
+- name: "Install via Flatpak"
+  ansible.builtin.flatpak:
+    name: com.discordapp.Discord
+    state: present

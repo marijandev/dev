@@ -1,5 +1,5 @@
 ---
-- name: Sshfs | {{ distribution_name }} | Install sshfs
+- name: "Install"
   ansible.builtin.apt:
     name: sshfs
     state: present

@@ -1,17 +1,17 @@
 ---
-- name: Check if FiraCode is installed
+- name: "Check if FiraCode is installed"
   ansible.builtin.shell:
     cmd: fc-list | grep -q "FiraCode"
   register: font_installed
   ignore_errors: yes
 
-- name: Download FiraCode
+- name: "Download FiraCode"
   ansible.builtin.get_url:
     url: https://github.com/tonsky/FiraCode/releases/download/6.2/Fira_Code_v6.2.zip
     dest: /tmp/FiraCode.zip
   when: font_installed.rc != 0
 
-- name: Unzip FiraCode
+- name: "Unzip FiraCode"
   ansible.builtin.unarchive:
     src: /tmp/FiraCode.zip
     dest: /usr/local/share/fonts
@@ -19,19 +19,19 @@
   become: true
   when: font_installed.rc != 0
 
-- name: Check if Ubuntu Nerd Font is installed
+- name: "Check if Ubuntu Nerd Font is installed"
   ansible.builtin.shell:
     cmd: fc-list | grep -q "UbuntuMono"
   register: ubuntu_installed
   ignore_errors: yes
 
-- name: Download Ubuntu Nerd Font
+- name: "Download Ubuntu Nerd Font"
   ansible.builtin.get_url:
     url: https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/UbuntuMono.zip
     dest: /tmp/UbuntuMono.zip
   when: ubuntu_installed.rc != 0
 
-- name: Unzip Ubuntu Nerd Font
+- name: "Unzip Ubuntu Nerd Font"
   ansible.builtin.unarchive:
     src: /tmp/UbuntuMono.zip
     dest: /usr/local/share/fonts
@@ -39,7 +39,7 @@
   become: true
   when: ubuntu_installed.rc != 0
 
-- name: Update font cache
+- name: "Update font cache"
   ansible.builtin.shell: fc-cache -fv
   become: true
   when: font_installed.rc != 0

@@ -1,5 +1,5 @@
 ---
-- name: "Tmux | {{ distribution_name }} | Install tmux"
+- name: "Install"
   ansible.builtin.apt:
     name: tmux
     state: present

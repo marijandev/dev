@@ -1,6 +1,6 @@
 ---
-- name: Install dependencies for gopass
-  apt:
+- name: "Install dependencies for gopass"
+  ansible.builtin.apt:
     name:
       - git
       - gnupg
@@ -8,13 +8,13 @@
     state: present
   become: yes
 
-- name: Add gopass GPG key
-  shell: |
+- name: "Add gopass GPG key"
+  ansible.builtin.shell: |
     curl -fsSLo /usr/share/keyrings/gopass-archive-keyring.gpg https://packages.gopass.pw/repos/gopass/gopass-archive-keyring.gpg
   become: yes
 
-- name: Add gopass repository
-  lineinfile:
+- name: "Add gopass repository"
+  ansible.builtin.lineinfile:
     path: /etc/apt/sources.list.d/gopass.sources
     line: |
       Types: deb
@@ -27,8 +27,8 @@
     state: present
   become: yes
 
-- name: Update package cache and install gopass
-  apt:
+- name: "Update package cache and install gopass"
+  ansible.builtin.apt:
     update_cache: yes
     name:
       - gopass

@@ -1,5 +1,5 @@
 ---
-- name: "Git | {{ distribution_name }} | Install git"
+- name: "Install"
   ansible.builtin.apt:
     name:
       - git

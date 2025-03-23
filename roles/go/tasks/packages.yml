@@ -1,5 +1,5 @@
 ---
-- name: Go-Lang | Install GoLang Packages
+- name: "Install GoLang Packages"
   ansible.builtin.command:
     cmd: "go install {{ item.package }}"
     creates: "~/go/bin/{{ item.cmd }}"

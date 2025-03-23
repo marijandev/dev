@@ -1,0 +1,7 @@
+---
+- name: "Install"
+  ansible.builtin.apt:
+    name: awesome
+    state: latest
+    update_cache: yes
+  become: true

@@ -1,14 +1,8 @@
 ---
-- name: "System | Checking for Distribution Config: {{ distribution_name }}"
-  ansible.builtin.stat:
-    path: "{{ role_path }}/tasks/{{ distribution_name }}.yml"
-  register: system_distribution_config
+- name: "Run {{ distribution_name }} Tasks"
+  ansible.builtin.import_tasks: "{{ distribution_name }}.yml"
 
-- name: "System | Run Tasks: {{ distribution_name }}"
-  ansible.builtin.include_tasks: "{{ distribution_name }}.yml"
-  when: system_distribution_config.stat.exists
-
-- name: "System | Set hosts"
+- name: "Set hosts"
   ansible.builtin.template:
     dest: "/etc/hosts"
     src: hosts.j2

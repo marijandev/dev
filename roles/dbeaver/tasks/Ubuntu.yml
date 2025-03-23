@@ -1,22 +1,17 @@
 ---
-- name: Ensure wget is installed
+- name: "Ensure wget is installed"
   ansible.builtin.apt:
     name: wget
     state: present
   become: true
 
-- name: Download DBeaver Community Edition .deb file
+- name: "Download DBeaver Community Edition .deb file"
   ansible.builtin.get_url:
     url: https://dbeaver.io/files/dbeaver-ce_latest_amd64.deb
     dest: /tmp/dbeaver-ce_latest_amd64.deb
 
-- name: Install DBeaver Community Edition
+- name: "Install DBeaver Community Edition"
   ansible.builtin.apt:
     deb: /tmp/dbeaver-ce_latest_amd64.deb
     state: present
   become: true
-
-- name: Clean up .deb file after installation
-  ansible.builtin.file:
-    path: /tmp/dbeaver-ce_latest_amd64.deb
-    state: absent

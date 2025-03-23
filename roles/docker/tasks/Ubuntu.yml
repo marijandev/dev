@@ -1,11 +1,11 @@
 ---
 # These steps are based on the official Docker documentation: https://docs.docker.com/engine/install/ubuntu/#installation-methods
-- name: "Docker | Update APT cache"
+- name: "Update APT cache"
   ansible.builtin.apt:
     update_cache: true
   become: true
 
-- name: "Docker | Install dependencies"
+- name: "Install dependencies"
   ansible.builtin.apt:
     name:
       - ca-certificates
@@ -14,28 +14,28 @@
     state: present
   become: true
 
-- name: "Docker | Add Docker’s official GPG key"
+- name: "Add Docker’s official GPG key"
   ansible.builtin.apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     keyring: /etc/apt/keyrings/docker.gpg
     state: present
   become: true
 
-- name: "Docker | Get System Architecture"
+- name: "Get System Architecture"
   ansible.builtin.command: "dpkg --print-architecture"
   register: dpkg_architecture
   changed_when: false
   failed_when: false
   check_mode: false
 
-- name: "Docker | Add Docker’s stable repository"
+- name: "Add Docker’s stable repository"
   ansible.builtin.apt_repository:
     repo: deb [arch={{ dpkg_architecture.stdout }} signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
     mode: "0644"
     state: present
   become: true
 
-- name: "Docker | Install Docker Engine"
+- name: "Install Docker Engine"
   ansible.builtin.apt:
     name:
       - docker-ce
@@ -47,28 +47,28 @@
     update_cache: true
   become: true
 
-- name: "Docker | Enable service"
+- name: "Enable service"
   ansible.builtin.systemd:
     enabled: true
     name: docker
     state: started
   become: true
 
-- name: "Docker | Add to group"
+- name: "Add to group"
   ansible.builtin.user:
     append: true
     groups: docker
     name: "{{ ansible_env['USER'] }}"
   become: true
 
-- name: "Docker | Ensure docker data directory exists"
+- name: "Ensure docker data directory exists"
   ansible.builtin.file:
     path: "{{  ansible_user_dir }}/.local/lib/docker"
     state: directory
     mode: "0710"
   become: true
 
-- name: "Docker | Copy daemon.json"
+- name: "Copy daemon.json"
   ansible.builtin.template:
     dest: "/etc/docker/daemon.json"
     src: "daemon.json"

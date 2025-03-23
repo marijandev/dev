@@ -1,5 +1,5 @@
 ---
-- name: "System | {{ distribution_name }} | Update APT Repos and Upgrade APT Packages"
+- name: "Update APT Repos and Upgrade APT Packages"
   ansible.builtin.apt:
     update_cache: true
     upgrade: full
@@ -7,10 +7,16 @@
     autoclean: true
   become: true
 
-- name: "System | {{ distribution_name }} | Install"
+- name: "Install"
   ansible.builtin.apt:
     name:
       - jq
       - open-iscsi
+      - htop
+      - light
+      - stow
+      - pavucontrol
+      - flameshot
+      - ripgrep
     state: present
   become: true

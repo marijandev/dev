@@ -1,13 +1,15 @@
 ---
-- name: "FZF | Uninstall APT fzf"
+- name: "Uninstall APT fzf"
   ansible.builtin.apt:
     name: fzf
     state: absent
   become: true
 
-- name: "FZF | Clone Latest Version"
+- name: "Clone Latest Version"
   ansible.builtin.git:
     repo: https://github.com/junegunn/fzf.git
     depth: 1
     dest: "{{ ansible_user_dir }}/.fzf"
-  notify: "Install FZF"
+
+- name: "Install FZF"
+  ansible.builtin.shell: "{{ ansible_user_dir }}/.fzf/install --all --no-update-rc --no-zsh --no-fish"

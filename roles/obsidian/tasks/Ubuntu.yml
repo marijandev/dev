@@ -1,0 +1,11 @@
+---
+- name: "Detect if Desktop Environment"
+  ansible.builtin.set_fact:
+    ansible_host_is_desktop_environment: "{{ lookup('env', 'XDG_CURRENT_DESKTOP') }}"
+
+- name: "Install"
+  community.general.flatpak:
+    name: "md.obsidian.Obsidian"
+    state: present
+  when:
+    - ansible_host_is_desktop_environment | bool

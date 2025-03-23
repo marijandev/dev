@@ -1,10 +1,5 @@
 ---
-- name: Ensure flatpak is installed
-  ansible.builtin.apt:
-    name: flatpak
-    state: present
-
-- name: Install Slack via Flatpak
+- name: "Install via Flatpak"
   ansible.builtin.flatpak:
     name: com.slack.Slack
     state: present

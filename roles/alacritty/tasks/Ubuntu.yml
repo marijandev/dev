@@ -1,5 +1,5 @@
 ---
-- name: "Install Alacritty"
+- name: "Install"
   ansible.builtin.apt:
     name: alacritty
     state: latest

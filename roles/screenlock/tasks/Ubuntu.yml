@@ -1,0 +1,7 @@
+---
+- name: "Install"
+  ansible.builtin.apt:
+    name: xscreensaver
+    state: latest
+    update_cache: yes
+  become: true

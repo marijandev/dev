@@ -1,0 +1,4 @@
+- name: Clean up .deb file after installation
+  ansible.builtin.file:
+    path: /tmp/dbeaver-ce_latest_amd64.deb
+    state: absent

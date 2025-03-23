@@ -1,6 +1,6 @@
 ---
-- name: Install build prerequisites
-  apt:
+- name: "Install build prerequisites"
+  ansible.builtin.apt:
     name:
       - ninja-build
       - cmake
@@ -10,27 +10,27 @@
     state: present
   become: yes
 
-- name: Create ~/src directory if it doesn't exist
-  file:
+- name: "Create ~/src directory if it doesn't exist"
+  ansible.builtin.file:
     path: "{{ ansible_user_dir }}/src"
     state: directory
 
-- name: Clone or Update Neovim repository
-  git:
+- name: "Clone or Update Neovim repository"
+  ansible.builtin.git:
     repo: https://github.com/neovim/neovim.git
     dest: "{{ ansible_user_dir }}/src/neovim"
     version: master
   register: git_status
 
-- name: Build and install Neovim if updated
+- name: "Build and install Neovim if updated"
   block:
-    - name: Build Neovim
-      shell:
+    - name: "Build Neovim"
+      ansible.builtin.shell:
         cmd: make CMAKE_BUILD_TYPE="{{ build_type }}"
         chdir: "{{ ansible_user_dir }}/src/neovim"
 
-    - name: Install Neovim
-      shell:
+    - name: "Install Neovim"
+      ansible.builtin.shell:
         cmd: make install
         chdir: "{{ ansible_user_dir }}/src/neovim"
       become: yes
