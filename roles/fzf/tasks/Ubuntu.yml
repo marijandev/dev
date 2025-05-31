@@ -12,4 +12,4 @@
     dest: "{{ ansible_user_dir }}/.fzf"
 
 - name: "Install FZF"
-  ansible.builtin.shell: "{{ ansible_user_dir }}/.fzf/install --all --no-update-rc --no-zsh --no-fish"
+  ansible.builtin.shell: "{{ ansible_user_dir }}/.fzf/install --all --no-update-rc --no-bash --no-fish"
