@@ -21,7 +21,7 @@
 
 - name: "Check if Ubuntu Nerd Font is installed"
   ansible.builtin.shell:
-    cmd: fc-list | grep -q "UbuntuMono"
+    cmd: fc-list | grep -q "UbuntuMonoNerdFont"
   register: ubuntu_installed
   ignore_errors: yes
 
