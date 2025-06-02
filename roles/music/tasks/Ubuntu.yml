@@ -1,0 +1,5 @@
+---
+- name: "Install via Flatpak"
+  ansible.builtin.flatpak:
+    name: com.spotify.Client
+    state: present
