@@ -1,0 +1,5 @@
+---
+- name: "Install via Flatpak"
+  ansible.builtin.flatpak:
+    name: org.telegram.desktop
+    state: present
