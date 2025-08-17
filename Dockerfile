@@ -42,8 +42,8 @@ RUN \
   touch /home/${USER}/.ansible-vault/vault.secret && \
   echo '$vault_secret' > /home/${USER}/.ansible-vault/vault.secret
 
-# RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/cyf0rk/dev/main/bin/dev)"
-RUN git clone --quiet https://github.com/cyf0rk/dev.git /home/${USER}/dev
+# RUN bash -c "$(curl -fsSL https://raw.githubusercontent.com/marijandev/dev/main/bin/dev)"
+RUN git clone --quiet https://github.com/marijandev/dev.git /home/${USER}/dev
 RUN bash -c "/home/${USER}/.local/bin/dev"
 
 RUN rm ~/.ansible-vault/vault.secret

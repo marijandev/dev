@@ -33,7 +33,7 @@ HOT="${ORANGE}\xF0\x9F\x94\xA5${NC}"
 WARNING="${RED}\xF0\x9F\x9A\xA8${NC}"
 RIGHT_ANGLE="${GREEN}\xE2\x88\x9F${NC}"
 
-
+GITHUB_USERNAME=marijandev
 DEV_LOG="$HOME/.dev.log"
 
 set -e
@@ -183,7 +183,7 @@ fi
 
 if ! [[ -d "$DEV_DIR" ]]; then
   __task "Cloning repository"
-  _cmd "git clone --quiet https://github.com/cyf0rk/dev.git $DEV_DIR"
+  _cmd "git clone --quiet https://github.com/$GITHUB_USERNAME/dev.git $DEV_DIR"
 else
   __task "Updating repository"
   _cmd "git -C $DEV_DIR pull --quiet"
